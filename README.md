@@ -1,7 +1,8 @@
 # Biodiversity-Plotly
 
 > Here goes your awesome project description!
-![Bacteria](Images/bacterica.png)
+
+![Bacteria](Images/bacteria.png)
 
 ## Table of contents
 * [General info](#general-info)
