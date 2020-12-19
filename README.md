@@ -1,6 +1,6 @@
 # Biodiversity-Plotly
 
-[git up pages](https://ssimoes48.github.io/Biodiversity-Plotly/)
+[github pages](https://ssimoes48.github.io/Biodiversity-Plotly/)
 
 ![Bacteria](Images/bacteria.png)
 
