@@ -22,7 +22,7 @@
 ## Technologies
 * JavaScript
 * HTML
-* Plot.ly
+* Plotly
 * 
 
 ## Setup
