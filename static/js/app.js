@@ -6,10 +6,12 @@ Feel free to disregard and create your own code */
 function buildMetadata(sample) {
 
     // Read the json data
+    d3.json("static/js/samples.json").then(function (sample) {
+        console.log(sample);
+    });
+    // Parse and filter the data to get the sample's metadata
 
-        // Parse and filter the data to get the sample's metadata
-
-        // Specify the location of the metadata and update it
+    // Specify the location of the metadata and update it
 
 }
 
@@ -18,13 +20,13 @@ function buildCharts(sample) {
 
     // Read the json data
 
-        // Parse and filter the data to get the sample's OTU data
-        // Pay attention to what data is required for each chart
+    // Parse and filter the data to get the sample's OTU data
+    // Pay attention to what data is required for each chart
 
-        // Create bar chart in correct location
+    // Create bar chart in correct location
 
-        // Create bubble chart in correct location
-    
+    // Create bubble chart in correct location
+
 }
 
 // Define function that will run on page load
@@ -32,15 +34,15 @@ function init() {
 
     // Read json data
 
-        // Parse and filter data to get sample names
+    // Parse and filter data to get sample names
 
-        // Add dropdown option for each sample
+    // Add dropdown option for each sample
 
     // Use first sample to build metadata and initial plots
 
 }
 
-function optionChanged(newSample){
+function optionChanged(newSample) {
 
     // Update metadata with newly selected sample
 
