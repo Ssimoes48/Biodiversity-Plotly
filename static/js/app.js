@@ -6,14 +6,17 @@ Feel free to disregard and create your own code */
 function buildMetadata(sample) {
 
     // Read the json data
-    d3.json("static/js/samples.json").then(function (sample) {
-        console.log(sample);
-    });
+    d3.json("sample.json").then(sample),
+    console.log(sample);
+   
     // Parse and filter the data to get the sample's metadata
+    // var dataParse = JSON.parse();
+    //     console.log(dataParse);
 
     // Specify the location of the metadata and update it
 
 }
+console.log("hello world");
 
 // Define a function that will create charts for given sample
 function buildCharts(sample) {
