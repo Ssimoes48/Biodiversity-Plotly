@@ -2,16 +2,41 @@
 This is not the only way to complete this assignment.
 Feel free to disregard and create your own code */
 
+var select = d3.select("#selDataset");
+
+// Define function that will run on page load
+function init() {
+
+    // Read json data
+    d3.json("samples.json").then((response) => {
+        var names = response.names;
+
+        console.log(names);
+
+        names.forEach(name => {
+
+            select.append("option")
+                .text(name)
+                .property("value", name);
+        });
+
+        buildMetadata(names[0]);
+    });
+}
+
 // Define a function that will create metadata for given sample
 function buildMetadata(sample) {
 
     // Read the json data
-    d3.json("sample.json").then(sample),
-    console.log(sample);
-   
+    d3.json("samples.json").then((response) => {
+        var metadata = response.metadata;
+        var filteredData = metadata.filter(meta => meta.id == sample)[0];
+
+        console.log(filteredData);
+    });
     // Parse and filter the data to get the sample's metadata
-    // var dataParse = JSON.parse();
-    //     console.log(dataParse);
+
+    
 
     // Specify the location of the metadata and update it
 
@@ -29,19 +54,6 @@ function buildCharts(sample) {
     // Create bar chart in correct location
 
     // Create bubble chart in correct location
-
-}
-
-// Define function that will run on page load
-function init() {
-
-    // Read json data
-
-    // Parse and filter data to get sample names
-
-    // Add dropdown option for each sample
-
-    // Use first sample to build metadata and initial plots
 
 }
 
