@@ -33,38 +33,42 @@ function buildMetadata(sample) {
         var filteredData = metadata.filter(meta => meta.id == sample)[0];
 
         console.log(filteredData);
+
+        var panel = d3.select("#sample-metadata");
+        panel.html("");
+        Object.entries(filteredData).forEach(([key, value]) => {
+            panel.append("p")
+                .text(`${key}:${value}`);
+        });
     });
-    // Parse and filter the data to get the sample's metadata
+};
+// Parse and filter the data to get the sample's metadata
 
-    
 
-    // Specify the location of the metadata and update it
 
-}
-console.log("hello world");
+// Specify the location of the metadata and update it
 
 // Define a function that will create charts for given sample
 function buildCharts(sample) {
 
-    // Read the json data
+            // Read the json data
 
-    // Parse and filter the data to get the sample's OTU data
-    // Pay attention to what data is required for each chart
+            // Parse and filter the data to get the sample's OTU data
+            // Pay attention to what data is required for each chart
 
-    // Create bar chart in correct location
+            // Create bar chart in correct location
 
-    // Create bubble chart in correct location
+            // Create bubble chart in correct location
 
-}
+        }
 
 function optionChanged(newSample) {
 
-    // Update metadata with newly selected sample
+            // Update metadata with newly selected sample
 
-    // Update charts with newly selected sample
+            // Update charts with newly selected sample
 
-}
+        }
 
 // Initialize dashboard on page load
 init();
-
