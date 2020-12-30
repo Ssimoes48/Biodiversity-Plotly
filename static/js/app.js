@@ -22,6 +22,35 @@ function init() {
 
         buildMetadata(names[0]);
         buildCharts(names[0]);
+        buildGauge(names[0]);
+        genderWash(names[0]);
+
+    });
+}
+
+function genderWash(sample) {
+    d3.json("samples.json").then((response) => {
+        var metadata = response.metadata;
+
+        var female = (metadata.gender === "F");
+        var male = (metadata.gender === "M");
+        
+        var trace5 = {
+            x: female,
+            y: metadata.wfreq,
+            type: 'bar',
+        };
+
+        var trace6 = {
+            x: male,
+            y: metadata.wfreq,
+            type: 'bar',
+        };
+
+        var data5 = [trace5 + trace6];
+
+        Plotly.newPlot('genderBar', data5);
+
     });
 }
 
@@ -85,14 +114,32 @@ function buildCharts(sample) {
         var data2 = [trace1];
 
         var layout2 = {
-            title: 'Belly Button',
+            font: { color: "black", family: "Arial" },
+            title: 'Bacteria Found in Belly Button: Bubble Chart',
             showlegend: false,
         };
 
         Plotly.newPlot('bubble', data2, layout2);
 
+        var trace4 = {
+            type: "pie",
+            values: sampleData.sample_values,
+            labels: sampleData.otu_labels,
+            textinfo: sampleData.sample_values + sampleData.otu_labels,
+            textposition: "outside",
+            automargin: true,
+        }
+        var data4 = [trace4];
+
+        var layout4 = {
+            title: 'Bacteria Found in Belly Button: Pie Chart',
+            showlegend: false
+        }
+
+        Plotly.newPlot('pie', data4, layout4);
     });
 }
+
 function buildGauge(sample) {
 
     // Read the json data
@@ -101,39 +148,39 @@ function buildGauge(sample) {
         var washData = metadata.filter(wash => wash.id == sample)[0];
 
         console.log(washData.wfreq);
-        
-        var data3 = [
-            {
-                type: "indicator",
-                mode: "gauge+number+delta",
-                value: washData.wfreq,
-                title: { text: "Belly Button Wash Frequency", font: { size: 18 } },
-                gauge: {
-                    bar: { color: "darkblue" },
-                    bgcolor: "white",
-                    borderwidth: 2,
-                    bordercolor: "gray",
-                    steps: [
-                        { range: [0, 1], color: "cyan" },
-                        { range: [1, 2], color: "cyan" },
-                        { range: [2, 3], color: "cyan" },
-                        { range: [3, 4], color: "cyan" },
-                        { range: [4, 5], color: "cyan" },
-                        { range: [5, 6], color: "cyan" },
-                        { range: [6, 7], color: "cyan" },
-                        { range: [7, 8], color: "cyan" },
-                        { range: [8, 9], color: "royalblue" },
-                    ],
-                }
+
+        var trace3 = {
+            type: "indicator",
+            mode: "gauge+number+delta",
+            value: washData.wfreq,
+            title: { text: "Belly Button Wash Frequency: Number of Washes", font: { size: 18 } },
+            gauge: {
+                axis: { range: [null, 9], tickwidth: 1, tickcolor: "darkblue" },
+                bar: { color: "white" },
+                bgcolor: "white",
+                borderwidth: 2,
+                bordercolor: "gray",
+                steps: [
+                    { range: [0, 1], color: "#0df2ff" },
+                    { range: [1, 2], color: "#26d9ff" },
+                    { range: [2, 3], color: "#4cb2ff" },
+                    { range: [3, 4], color: "#738cff" },
+                    { range: [4, 5], color: "#9966ff" },
+                    { range: [5, 6], color: "#b24dff" },
+                    { range: [6, 7], color: "#cc33ff" },
+                    { range: [7, 8], color: "#e619ff" },
+                    { range: [8, 9], color: "#ff00ff" },
+                ],
             }
-        ];
+        };
+        var data3 = [trace3];
 
         var layout3 = {
             width: 500,
             height: 400,
             margin: { t: 25, r: 25, l: 25, b: 25 },
-            paper_bgcolor: "lavender",
-            font: { color: "darkblue", family: "Arial" }
+            paper_bgcolor: "white",
+            font: { color: "black", family: "Arial" }
         };
 
         Plotly.newPlot('gauge', data3, layout3);
