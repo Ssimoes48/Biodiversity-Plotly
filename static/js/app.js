@@ -67,7 +67,7 @@ function buildCharts(sample) {
             orientation: 'h'
         }];
 
-          Plotly.newPlot('bar', data);
+        Plotly.newPlot('bar', data);
 
         // Create bubble chart in correct location
         var trace1 = {
@@ -76,23 +76,70 @@ function buildCharts(sample) {
             mode: 'markers',
             text: sampleData.otu_labels,
             marker: {
-              color: sampleData.otu_ids,
-              size: sampleData.sample_values,
-              colorscale: 'Picnic'
+                color: sampleData.otu_ids,
+                size: sampleData.sample_values,
+                colorscale: 'Picnic'
             }
-          };
+        };
 
-          var data2 = [trace1];
+        var data2 = [trace1];
 
-          var layout = {
+        var layout2 = {
             title: 'Belly Button',
             showlegend: false,
-          };
+        };
 
-          Plotly.newPlot('bubble', data2, layout);
+        Plotly.newPlot('bubble', data2, layout2);
 
     });
 }
+function buildGauge(sample) {
+
+    // Read the json data
+    d3.json("samples.json").then((response) => {
+        var metadata = response.metadata;
+        var washData = metadata.filter(wash => wash.id == sample)[0];
+
+        console.log(washData.wfreq);
+        
+        var data3 = [
+            {
+                type: "indicator",
+                mode: "gauge+number+delta",
+                value: washData.wfreq,
+                title: { text: "Belly Button Wash Frequency", font: { size: 18 } },
+                gauge: {
+                    bar: { color: "darkblue" },
+                    bgcolor: "white",
+                    borderwidth: 2,
+                    bordercolor: "gray",
+                    steps: [
+                        { range: [0, 1], color: "cyan" },
+                        { range: [1, 2], color: "cyan" },
+                        { range: [2, 3], color: "cyan" },
+                        { range: [3, 4], color: "cyan" },
+                        { range: [4, 5], color: "cyan" },
+                        { range: [5, 6], color: "cyan" },
+                        { range: [6, 7], color: "cyan" },
+                        { range: [7, 8], color: "cyan" },
+                        { range: [8, 9], color: "royalblue" },
+                    ],
+                }
+            }
+        ];
+
+        var layout3 = {
+            width: 500,
+            height: 400,
+            margin: { t: 25, r: 25, l: 25, b: 25 },
+            paper_bgcolor: "lavender",
+            font: { color: "darkblue", family: "Arial" }
+        };
+
+        Plotly.newPlot('gauge', data3, layout3);
+    });
+};
+
 
 function optionChanged(newSample) {
 
@@ -101,6 +148,8 @@ function optionChanged(newSample) {
 
     // Update charts with newly selected sample
     buildMetadata(newSample);
+
+    buildGauge(newSample);
 }
 
 // Initialize dashboard on page load
