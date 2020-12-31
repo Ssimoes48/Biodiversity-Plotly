@@ -1,17 +1,9 @@
-/* The following is an example on how you might structure your code.
-This is not the only way to complete this assignment.
-Feel free to disregard and create your own code */
-
 var select = d3.select("#selDataset");
 
-// Define function that will run on page load
 function init() {
 
-    // Read json data
     d3.json("samples.json").then((response) => {
         var names = response.names;
-
-        console.log(response);
 
         names.forEach(name => {
 
@@ -54,15 +46,11 @@ function genderWash(sample) {
     });
 }
 
-// Define a function that will create metadata for given sample
 function buildMetadata(sample) {
 
-    // Read the json data
     d3.json("samples.json").then((response) => {
         var metadata = response.metadata;
         var filteredData = metadata.filter(meta => meta.id == sample)[0];
-
-        console.log(filteredData);
 
         var panel = d3.select("#sample-metadata");
         panel.html("");
@@ -72,22 +60,13 @@ function buildMetadata(sample) {
         });
     });
 }
-// Parse and filter the data to get the sample's metadata
-// Specify the location of the metadata and update it
 
-// Define a function that will create charts for given sample
 function buildCharts(sample) {
     d3.json("samples.json").then((response) => {
         var samples = response.samples;
         var sampleData = samples.filter(button => button.id == sample)[0];
-        // Read the json data
-        console.log(sampleData);
 
-        // Parse and filter the data to get the sample's OTU data
-
-        // Pay attention to what data is required for each chart
-
-        // Create bar chart in correct location
+       // Create bar chart 
         var data = [{
             type: 'bar',
             x: sampleData.sample_values.slice(0, 10).reverse(),
@@ -98,7 +77,7 @@ function buildCharts(sample) {
 
         Plotly.newPlot('bar', data);
 
-        // Create bubble chart in correct location
+        // Create bubble chart 
         var trace1 = {
             x: sampleData.otu_ids,
             y: sampleData.sample_values,
@@ -121,6 +100,7 @@ function buildCharts(sample) {
 
         Plotly.newPlot('bubble', data2, layout2);
 
+        // Create bonus pie chart 
         var trace4 = {
             type: "pie",
             values: sampleData.sample_values,
@@ -142,7 +122,6 @@ function buildCharts(sample) {
 
 function buildGauge(sample) {
 
-    // Read the json data
     d3.json("samples.json").then((response) => {
         var metadata = response.metadata;
         var washData = metadata.filter(wash => wash.id == sample)[0];
@@ -187,17 +166,13 @@ function buildGauge(sample) {
     });
 };
 
-
 function optionChanged(newSample) {
 
-    // Update metadata with newly selected sample
     buildCharts(newSample);
 
-    // Update charts with newly selected sample
     buildMetadata(newSample);
 
     buildGauge(newSample);
 }
 
-// Initialize dashboard on page load
 init();
