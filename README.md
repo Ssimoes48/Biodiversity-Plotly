@@ -48,7 +48,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 ![wash gauge](Images/guage_code.PNG)
 
-![wash gauge](Images/wash_gauge/PNG)
+![wash gauge](Images/wash_gauge.PNG)
 
 ## Resources 
 
