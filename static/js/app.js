@@ -15,34 +15,6 @@ function init() {
         buildMetadata(names[0]);
         buildCharts(names[0]);
         buildGauge(names[0]);
-        genderWash(names[0]);
-
-    });
-}
-
-function genderWash(sample) {
-    d3.json("samples.json").then((response) => {
-        var metadata = response.metadata;
-
-        var female = (metadata.gender === "F");
-        var male = (metadata.gender === "M");
-        
-        var trace5 = {
-            x: female,
-            y: metadata.wfreq,
-            type: 'bar',
-        };
-
-        var trace6 = {
-            x: male,
-            y: metadata.wfreq,
-            type: 'bar',
-        };
-
-        var data5 = [trace5 + trace6];
-
-        Plotly.newPlot('genderBar', data5);
-
     });
 }
 
@@ -120,6 +92,7 @@ function buildCharts(sample) {
     });
 }
 
+// Create bonus wash gauge 
 function buildGauge(sample) {
 
     d3.json("samples.json").then((response) => {
@@ -176,3 +149,32 @@ function optionChanged(newSample) {
 }
 
 init();
+
+// bonus extra chart code - data not in usable format:
+// function genderWash(sample) {
+//     d3.json("samples.json").then((response) => {
+//         var metadata = response.metadata;
+
+//         var filteredFemale = metadata.filter(meta => meta.gender == "F");
+//         var filteredMale = metadata.filter(meta => meta.gender == "M");
+        
+//         var trace5 = {
+//             x: filteredFemale.map(female => female.age),
+//             y: filteredFemale.map(female => female.wfreq),
+//             mode: 'markers',
+//             type: 'scatter',
+//         };
+
+//         var trace6 = {
+//             x: filteredMale.map(male => male.age),
+//             y: filteredMale.map(male => male.wfreq),
+//             mode: 'markers',
+//             type: 'scatter',
+//         };
+
+//         var data5 = [trace5, trace6];
+
+//         Plotly.newPlot('genderScatter', data5);
+
+//     });
+// }
